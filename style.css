@@ -1,0 +1,694 @@
+body {
+   height: 100vh;
+   font-size: 62.5%;
+   background-color: #171717;
+   color: white;
+   overflow-x: hidden;
+}
+
+header {
+   position: fixed;
+   width: 100vw;
+   background-color: #171717;
+   z-index: 5;
+}
+
+.header-menu {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 20px 30px;
+}
+
+.logo img {
+   width: 80px;
+}
+
+.header-menu__nav ul li {
+   display: inline-block;
+   font-size: 2rem;
+   padding: 0 3vw;
+}
+.header-menu__nav .topmenu li a {
+   color: white;
+}
+.header-menu__nav ul li a:hover {
+   text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #0fa,
+      0 0 82px #0fa,
+      0 0 92px #0fa,
+      0 0 102px #0fa,
+      0 0 151px #0fa;
+}
+
+.submenu {
+   display: flex;
+   flex-direction: column;
+   min-width: 150px;
+   position: absolute;
+   z-index: 5;
+   transform-origin: 0 0;
+   transform: rotateX(-90deg);
+   transition: 0.3s linear;
+   visibility: hidden;
+   opacity: 0;
+}
+.submenu li {
+   position: relative;
+   margin: 10px 0;
+}
+.header-menu__nav .submenu li a {
+   background-color: #323131;
+}
+.submenu .submenu {
+   position: absolute;
+   left: 0;
+   top: 0;
+   transition: transform 0.3s linear;
+}
+.topmenu li:hover > .submenu {
+   visibility: visible;
+   opacity: 1;
+   transform: rotateX(0deg);
+}
+
+/* логин-пароль */
+.open-log {
+   display: flex;
+}
+.login {
+   color: #ffffff;
+   width: 100px;
+   height: 30px;
+   background: #000;
+   border: 2px solid white;
+   border-radius: 20px;
+}
+.login:hover {
+   background-color: aquamarine;
+   color: #000;
+   transition: 0.5s;
+}
+
+.login-block {
+   width: 300px;
+   height: 350px;
+   background-color: #454444;
+   color: #fff;
+   position: absolute;
+   top: 300%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   border-radius: 10px;
+   padding: 80px 30px;
+   display: none;
+}
+.user {
+   width: 100px;
+   height: 100px;
+   background: #fff;
+   border-radius: 50%;
+   position: absolute;
+   top: -15%;
+   left: calc(50% - 50px);
+}
+h1 {
+   text-align: center;
+   padding: 0 0 20px;
+   font-size: 30px;
+}
+label {
+   font-weight: bold;
+   font-size: 14px;
+}
+.login-block input {
+   width: 100%;
+   margin-bottom: 20px;
+}
+.login-block input[type="text"],
+input[type="password"] {
+   background: transparent;
+   border-bottom: 1px solid #fff;
+   color: #fff;
+   height: 30px;
+   font-size: 15px;
+}
+.login-block input[type="submit"] {
+   height: 40px;
+   border-radius: 25px;
+   background-color: transparent;
+   border: 2px solid aqua;
+   color: #fff;
+   font-size: 20px;
+   transition: 0.5s;
+}
+.login-block input[type="submit"]:hover {
+   cursor: pointer;
+   background-color: aquamarine;
+   color: #000;
+}
+.pass-icon {
+   position: absolute;
+   right: 35px;
+   top: 58%;
+   cursor: pointer;
+}
+
+/* <!------- бургер меню ------------> */
+
+.open {
+   display: flex !important;
+}
+
+.burger {
+   display: none;
+   position: relative;
+   z-index: 10;
+   align-items: center;
+   justify-content: flex-end;
+   width: 30px;
+   height: 18px;
+   margin-left: 50px;
+}
+
+.burger span {
+   height: 2px;
+   width: 80%;
+   transform: scale(1);
+   background-color: #faf6f2;
+}
+
+.burger::before,
+.burger::after {
+   content: "";
+   position: absolute;
+   height: 2px;
+   width: 100%;
+   background-color: #faf6f2;
+   transition: all 0.3s ease 0s;
+}
+
+.burger::before {
+   top: 0;
+}
+.burger::after {
+   bottom: 0;
+}
+
+.burger.active span {
+   transform: scale(0);
+}
+
+.burger.active::before {
+   top: 50%;
+   transform: rotate(-45deg) translate(0, -50%);
+}
+
+.burger.active::after {
+   bottom: 50%;
+   transform: rotate(45deg) translate(0, 50%);
+}
+
+@media (max-width: 850px) {
+   .burger {
+      display: flex;
+   }
+
+   .header-menu__nav {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      overflow-y: auto;
+      padding: 50px 40px;
+      background-color: black;
+      animation: burgerAnimation 0.4s;
+   }
+
+   .header-menu__nav ul {
+      display: flex;
+      flex-direction: column;
+      row-gap: 50px;
+   }
+
+   .submenu {
+      margin-left: 10%;
+   }
+   .header-menu__nav .submenu li a {
+      background-color: black;
+   }
+}
+
+@keyframes burgerAnimation {
+   from {
+      opacity: 0;
+   }
+   to {
+      opacity: 1;
+   }
+}
+/* ---------------------------------------------------- */
+.conteiner {
+   padding-top: 200px;
+   display: flex;
+   justify-content: space-between;
+}
+
+@media (min-width: 850px) {
+   .plate img {
+      display: none;
+   }
+}
+@media (max-width: 850px) {
+   .conteiner {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+   }
+
+   .plate {
+      display: flex;
+      justify-content: center;
+   }
+   .plate img {
+      width: 40vw;
+   }
+
+   .plate2 img {
+      display: none;
+   }
+   .plate1 img {
+      display: none;
+   }
+
+   .fish img {
+      display: none;
+   }
+
+   .center-column p {
+      padding: 0 70px;
+   }
+
+   .center-column h1 {
+      padding: 50px 50px 0;
+   }
+}
+
+/* ----------------left-column--------------------------- */
+.left-column {
+   display: flex;
+   flex-direction: column;
+}
+
+.fish-block1 {
+   position: absolute;
+   left: 0;
+   top: 150px;
+   width: 20vw;
+   height: auto;
+}
+
+.fish-block2 {
+   position: absolute;
+   right: 0;
+   top: 150px;
+   width: 20vw;
+   height: auto;
+}
+
+.fish {
+   overflow: hidden;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.fish img {
+   min-width: 100%;
+   min-height: 100%;
+}
+
+.qwerty1 {
+   position: absolute;
+   left: 0;
+   bottom: 0;
+   width: 30vw;
+   height: auto;
+}
+
+.plate1 {
+   overflow: hidden;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.plate1 img {
+   min-width: 100%;
+   min-height: 100%;
+}
+/* --------------------center-------------------------- */
+
+.center-column {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+}
+
+.center-column h1 {
+   margin: 0 1vw;
+   text-align: center;
+   font-family: "Playfair Display";
+   font-weight: 700;
+   font-size: 8rem;
+   animation: flicker 3s infinite alternate;
+   color: #fff;
+}
+
+@keyframes flicker {
+   0%,
+   18%,
+   22%,
+   25%,
+   53%,
+   57%,
+   100% {
+      text-shadow:
+         0 0 4px #fff,
+         0 0 11px #fff,
+         0 0 19px #fff,
+         0 0 50px #0fa,
+         0 0 10px #0fa,
+         0 0 10px #0fa,
+         0 0 15px rgb(184, 225, 19);
+   }
+   20%,
+   24%,
+   55% {
+      text-shadow: none;
+   }
+}
+
+.center-column p {
+   font-family: Montserrat;
+   margin: 3vw 1vw 0;
+   font-size: 1.8rem;
+   font-weight: 400;
+   text-align: center;
+   color: #b7b7b7;
+   max-width: 800px;
+}
+
+.city {
+   color: #ffffff;
+   width: 300px;
+   height: 20px;
+   background: #000;
+   border: 1px solid white;
+   border-radius: 20px;
+   margin: 50px auto 0;
+   padding: 0 10px;
+   cursor: pointer;
+}
+.email {
+   color: #ffffff;
+   font-family: "Montserrat - Semi Bold";
+   font-weight: 400;
+   text-align: center;
+}
+
+.socail {
+   margin: 40px auto;
+}
+.socail ul li {
+   display: inline-block;
+   text-align: center;
+   padding: 0 10px;
+}
+.socail ul li a img {
+   width: 3rem;
+}
+
+.left-ris {
+   width: 6vw;
+   height: 100%;
+   position: absolute;
+   bottom: -10%;
+   right: 150px;
+}
+
+.left-ris img {
+   width: inherit;
+   position: absolute;
+   bottom: 0;
+   left: 20%;
+}
+
+.right-ris {
+   width: 6vw;
+   height: 100%;
+   position: absolute;
+   bottom: -10%;
+   left: 150px;
+}
+.right-ris img {
+   width: inherit;
+   position: absolute;
+   bottom: 0;
+   right: -20%;
+}
+
+@media (max-width: 1100px) {
+   .left-ris img {
+      display: none;
+   }
+   .right-ris img {
+      display: none;
+   }
+}
+
+@media (max-width: 440px) {
+   .center-column h1 {
+      font-size: 3rem;
+   }
+
+   .center-column p {
+      font-size: 1.2rem;
+   }
+
+   .city {
+      width: 150px;
+   }
+}
+
+/*---------------- right-column---------------- */
+.right-column {
+   display: flex;
+   flex-direction: column;
+}
+
+.qwerty2 {
+   position: absolute;
+   right: 0;
+   bottom: 0;
+   width: 30vw;
+   height: auto;
+}
+
+.plate2 {
+   overflow: hidden;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.plate2 img {
+   min-width: 100%;
+   min-height: 100%;
+}
+
+/* ----------------Menu------------ */
+
+.container {
+   margin-top: 200px;
+   padding: 0 200px;
+}
+
+h3,
+h4 {
+   font-family: "Merriweather", serif;
+}
+
+.product-img {
+   width: 265px;
+   height: auto;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.item-title {
+   font-size: 1.5rem;
+   font-weight: 500;
+   font-family: "Merriweather", serif;
+   height: 70px;
+}
+
+.details-wrapper {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 25px;
+   width: 80%;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.items {
+   font-family: "Merriweather", serif;
+   background: #f2ede7;
+   border-radius: 8px;
+   width: 120px;
+   display: flex;
+   font-size: 18px;
+   height: 30px;
+   overflow: hidden;
+}
+
+.items__control {
+   width: 40px;
+   cursor: pointer;
+   transition: 0.2s ease-in;
+   text-align: center;
+}
+
+.items__control:hover {
+   background: #eb5a1e;
+   color: #fff;
+}
+
+.items__current {
+   width: 40px;
+}
+
+/* items--small */
+.items.items--small {
+   width: 90px;
+   font-size: 16px;
+   height: 26px;
+   text-align: center;
+}
+
+.items.items--small .items__control {
+   width: 30px;
+}
+
+.items.items--small .items__current {
+   width: 30px;
+}
+
+.price {
+   text-align: left;
+}
+
+.price__weight {
+   color: #6c757d !important;
+   font-size: 80%;
+   line-height: 1;
+}
+
+.price__currency {
+   font-size: 1.5rem;
+   font-weight: 600;
+   line-height: 1;
+}
+
+.btn-outline-warning {
+   color: #eb5a1e;
+   border-color: #eb5a1e;
+}
+
+.btn-outline-warning:hover {
+   color: #fff;
+   background-color: #eb5a1e;
+   border-color: #eb5a1e;
+}
+
+.cart-item {
+}
+
+.cart-item__top {
+   display: flex;
+   align-items: flex-start;
+   padding-bottom: 15px;
+   border-bottom: 1px solid #dee2e6;
+   margin-bottom: 15px;
+}
+
+.cart-item__img {
+}
+
+.cart-item__img img {
+   max-width: 100px;
+   height: auto;
+}
+
+.cart-item__desc {
+   padding-top: 15px;
+   padding-left: 15px;
+}
+
+.cart-item__title {
+   font-family: "Merriweather", serif;
+   font-size: 16px;
+   line-height: 1.2;
+   font-weight: 600;
+   margin-bottom: 5px;
+}
+
+.cart-item__weight {
+   color: #6c757d !important;
+   font-size: 80%;
+   line-height: 1;
+   margin-bottom: 15px;
+}
+
+.cart-item__details {
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+}
+
+.cart-item__details .price__currency {
+   font-size: 18px;
+   margin-left: 15px;
+}
+
+.cart-total {
+   font-size: 18px;
+   font-weight: 500;
+}
+
+.delivery-cost {
+}
+
+.free {
+   color: #0ea107;
+}
+
+.total-price {
+   color: #eb5a1e;
+}
+
+.rouble {
+   color: #eb5a1e;
+}
+
+.none {
+   display: none;
+}
