@@ -22,11 +22,6 @@ window.addEventListener('DOMContentLoaded', function () {
    const login = document.querySelector('.login');
    const loginBlock = document.querySelector('.login-block');
 
-   // Добавляем обработчик события для клика на document
-   document.addEventListener("click", function () {
-      hideLoginBlock(); // Вызываем функцию скрытия меню
-   });
-
    // Добавляем обработчик события для клика на меню
    loginBlock.addEventListener("click", function (event) {
       event.stopPropagation(); // Предотвращаем всплытие события клика до document
@@ -35,7 +30,9 @@ window.addEventListener('DOMContentLoaded', function () {
    login.addEventListener('click', function (event) {
       event.stopPropagation(); // Предотвращаем всплытие события клика до document
 
-      if (loginBlock.style.display === "none") {
+      const currentDisplay = window.getComputedStyle(loginBlock, null).getPropertyValue('display');
+
+      if (currentDisplay === "none") {
          loginBlock.style.display = "block";
       } else {
          loginBlock.style.display = "none"
@@ -46,8 +43,14 @@ window.addEventListener('DOMContentLoaded', function () {
       loginBlock.style.display = "none";
    }
 
+   // Добавляем обработчик события для клика на document
+   document.addEventListener("click", function () {
+      hideLoginBlock(); // Вызываем функцию скрытия меню
+   });
+
 
    // -------Cards-------------
+
 
    class MenuCard {
       constructor(src, alt, title, descr, price, parentSelector, ...classes) {
@@ -61,36 +64,64 @@ window.addEventListener('DOMContentLoaded', function () {
          this.isFlipped = false;
       }
 
+      // Переворачиваю карточку
+      toggleCard(card) {
+         const cardInner = card.querySelector('.menu__item-inner');
+         const cardInnerFront = card.querySelector('.menu__item-front');
+         const cardInnerBack = card.querySelector('.menu__item-descr');
+
+         cardInner.classList.toggle('menu__item-back');
+
+         if (cardInner.classList.contains('menu__item-back')) {
+            cardInnerFront.style.display = "none"
+            cardInnerBack.style.display = "block"
+         } else {
+            cardInnerFront.style.display = "block"
+            cardInnerBack.style.display = "none"
+         }
+      }
+
+
 
       render() {
          const element = document.createElement("div");
 
-         if (this.classes.length === 0) {
-            this.classes = "menu__item";
-            element.classList.add(this.classes);
-         } else {
-            this.classes.forEach((className) => element.classList.add(className));
+         const cardClasses = ["menu__item"];
+         if (this.classes.length > 0) {
+            cardClasses.push(...this.classes);
          }
 
+         element.classList.add(...cardClasses);
+
          element.innerHTML = `
-             <img src=${this.src} alt=${this.alt}>
-             <h3 class="menu__item-subtitle">${this.title}</h3>
-             <div class="menu__item-descr">описание ${this.descr1}</div>
-             <button class="menu__item-btn" onclick="flipCard(this)">Описание</button>
-             <div class="menu__item-divider"></div>
-             <div class="menu__item-price">
-                 <div class="menu__item-cost">Цена:</div>
-                 <div class="menu__item-total"><span>${this.price}</span> руб</div>
-             </div>
-             <div class="counter-container">
-        <button class="counter-btn decrement" id="decrement">-</button>
-        <span class="count" id="count">0</span>
-        <button class="counter-btn increment" id="increment">+</button>
-    </div>
-             <button class="menu__item-basket">Добавить в корзину</button>
+               <div class="menu__item-inner">
+                  <div class="menu__item-front">
+                     <img src=${this.src} alt=${this.alt}>
+                     <h3 class="menu__item-subtitle">${this.title}</h3>
+                     <div class="menu__item-divider"></div>    
+                  </div>
+                  <div class="menu__item-back">
+                     <div class="menu__item-descr hidden">${this.descr}</div>
+                  </div> 
+               </div>
+               <button class="menu__item-btn">Описание</button>
+               <div class="menu__item-price">
+                  <div class="menu__item-cost">Цена:</div>
+                  <div class="menu__item-total"><span>${this.price}</span> руб</div>
+               </div>
+               <div class="counter-container">
+                  <button class="counter-btn decrement" id="decrement">-</button>
+                  <span class="count" id="count">0</span>
+                  <button class="counter-btn increment" id="increment">+</button>
+               </div>
+               <button class="menu__item-basket">Добавить в корзину</button>
          `;
          this.parent.append(element);
 
+         const button = element.querySelector('.menu__item-btn');
+         button.addEventListener('click', () => {
+            this.toggleCard(element);
+         });
 
 
          // // ----------counter
