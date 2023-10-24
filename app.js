@@ -124,38 +124,15 @@ window.addEventListener('DOMContentLoaded', function () {
          });
 
 
-         // // ----------counter
-         const productCards = document.querySelectorAll('.menu__item');
-
-         productCards.forEach((card) => {
-            const decrementButton = card.querySelector('.decrement');
-            const incrementButton = card.querySelector('.increment');
-            const countDisplay = card.querySelector('.count');
-
-            let count = 0
-
-            decrementButton.addEventListener('click', () => {
-               if (count > 0) {
-                  count--;
-                  countDisplay.textContent = count;
-               }
-            });
-
-            incrementButton.addEventListener('click', () => {
-               count++;
-               countDisplay.textContent = count;
-            });
-         })
-
-
-
          // ------------basket
          const addToCartButtons = document.querySelectorAll('.menu__item-basket');
-         const headerBasketCountSpan = document.querySelector('.header-basket__count');
-         const headerBasketPriceSpan = document.querySelector('.header-basket__price');
+         const cartList = document.querySelector('.main-basket__list');
+         const headerBasketCountSpans = document.querySelectorAll('.header-basket__count');
+         const headerBasketPriceSpans = document.querySelectorAll('.header-basket__price');
 
-         let headerBasketCount = 0
-         let headerBasketPrice = 0
+
+         let headerBasketCount = 0;
+         let headerBasketPrice = 0;
 
 
          addToCartButtons.forEach(button => {
@@ -163,18 +140,55 @@ window.addEventListener('DOMContentLoaded', function () {
                const card = button.closest('.menu__item');
 
                if (card) {
-
+                  const productName = card.querySelector('.menu__item-subtitle').textContent;
+                  const existingCartItem = cartList.querySelector(`[data-id="${productName}"]`);
                   const countDisplay = card.querySelector('.count');
                   const productCount = parseInt(countDisplay.textContent);
-                  const productPrice = parseInt(card.querySelector('.menu__item-total').textContent)
+                  const productPrice = parseInt(card.querySelector('.menu__item-total').textContent);
 
                   headerBasketCount += productCount;
                   headerBasketPrice += productCount * productPrice;
 
-                  headerBasketCountSpan.textContent = headerBasketCount + " шт";
-                  headerBasketPriceSpan.textContent = headerBasketPrice + " руб";
+                  headerBasketCountSpans.forEach(span => {
+                     span.textContent = headerBasketCount + " шт";
+                  });
+                  headerBasketPriceSpans.forEach(span => {
+                     span.textContent = headerBasketPrice + " руб";
+                  });
 
-                  // document.querySelector('.count').innerText = 0
+                  if (existingCartItem) {
+                     const counterElement = existingCartItem.querySelector('.count')
+                     counterElement.innerText = parseInt(counterElement.innerText) + productCount
+                     
+                  }else {
+                     const cartItemHTML = `<div class="cart-item" data-id="${productName}">
+                           <div class="cart-item__top">
+                              <div class="cart-item__img">
+                              <img src=${this.src} alt=${this.alt}>
+                              </div>
+                              <div class="cart-item__desc">
+                                 <div class="cart-item__title">${productName}</div>
+
+                                 <!-- cart-item__details -->
+                                 <div class="cart-item__details">
+
+                                    <div class="counter-container">
+                                       <button class="counter-btn decrement" id="decrement">-</button>
+                                       <span class="count" id="count">${productCount}</span>
+                                       <button class="counter-btn increment" id="increment">+</button>
+                                    </div>
+
+                                    <div class="price">
+                                       <div class="price__currency">цена: ${productPrice} руб</div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>`;
+
+                     // Отобразим товар в корзине
+                     cartList.insertAdjacentHTML('beforeend', cartItemHTML);
+                  }
                }
             });
          });

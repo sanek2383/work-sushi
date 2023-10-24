@@ -37,8 +37,9 @@
       </nav>
       <button class="header-basket">
         <div class="header-check">
-          <span class="header-basket__count">0</span>
-          <span class="header-basket__price">0</span>
+          <span class="header-basket__count">0 шт</span>
+          <span>|</span>
+          <span class="header-basket__price">0 руб</span>
         </div>
       </button>
       <form action="#">
@@ -128,9 +129,19 @@
   </div>
   </div>
 
+  <!-- --- Корзина----------------------- -->
 
+  <div class="main-basket">
+    <div class="main-basket__container">
+      <h2 class="main-basket__title">Корзина</h2>
+      <ul class="main-basket__list"></ul>
+          <span class="final-price">Итого:</span>
+          <span class="header-basket__price">0 руб</span>
+    </div>
+  </div>
 
   <script src="app.js"></script>
+  <script src="./modules/counter.js"></script>
 </body>
 
 </html>
