@@ -82,7 +82,6 @@ window.addEventListener('DOMContentLoaded', function () {
       }
 
 
-
       render() {
          const element = document.createElement("div");
 
@@ -134,7 +133,6 @@ window.addEventListener('DOMContentLoaded', function () {
          let headerBasketCount = 0;
          let headerBasketPrice = 0;
 
-
          addToCartButtons.forEach(button => {
             button.addEventListener('click', () => {
                const card = button.closest('.menu__item');
@@ -159,8 +157,8 @@ window.addEventListener('DOMContentLoaded', function () {
                   if (existingCartItem) {
                      const counterElement = existingCartItem.querySelector('.count')
                      counterElement.innerText = parseInt(counterElement.innerText) + productCount
-                     
-                  }else {
+
+                  } else {
                      const cartItemHTML = `<div class="cart-item" data-id="${productName}">
                            <div class="cart-item__top">
                               <div class="cart-item__img">

@@ -9,7 +9,6 @@ window.addEventListener('click', function(event){
 
     if (event.target.classList.contains('increment')) {
 		counter.innerText = ++counter.innerText;
-      console.log('test')
 	}
 
    if (event.target.classList.contains('decrement')) {
@@ -33,9 +32,9 @@ window.addEventListener('click', function(event){
 	}
 
    // Проверяем клик на + или - внутри коризины
-	if (event.target.classList.contains('counter-btn') && event.target.closest('.cart-wrapper')) {
-		// Пересчет общей стоимости товаров в корзине
-		calcCartPriceAndDelivery();
-	}
+	// if (event.target.classList.contains('counter-btn') && event.target.closest('.cart-item__details')) {
+	// 	// Пересчет общей стоимости товаров в корзине
+	// 	// calcCartPriceAndDelivery();
+	// }
 
 })
