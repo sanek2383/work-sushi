@@ -681,6 +681,10 @@ input[type="password"] {
    margin: 50px;
 }
 
+.final-price{
+   margin-left: 50px;
+}
+
 /* ------------------------------------------ */
 .cart-item__top {
 	display: flex;
@@ -697,11 +701,12 @@ input[type="password"] {
 .cart-item__desc {
    display: flex;
    align-items:center;
-   justify-content: space-around;
+   justify-content:space-between;
    gap: 50px;
    min-width: 600px;
 	padding-top: 15px;
 	padding-left: 15px;
+   width: 100%;
 }
 
 .cart-item__title {

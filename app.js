@@ -184,7 +184,7 @@ window.addEventListener('DOMContentLoaded', function () {
                            </div>
                         </div>`;
 
-                     // Отобразим товар в корзине
+                     // Отображение товара в корзине
                      cartList.insertAdjacentHTML('beforeend', cartItemHTML);
                   }
                }
